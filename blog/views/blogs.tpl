@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>日志 - {{.website}}</title>
-	{{template "head" .}}
-</head>
-<body>
-
-{{template "header" .}}
-
-<div class="uk-container uk-container-center">
-	<div class="uk-grid">
-
     <div class="uk-width-medium-3-4">
     {{range $index, $elem := .blogs}}
         <article class="uk-article">
@@ -53,13 +40,13 @@
     </div>
 
     <div class="uk-width-medium-1-4">
-		{{template "right" .}}
+		<div class="uk-panel uk-panel-header">
+		    <h3 class="uk-panel-title">友情链接</h3>
+		    <ul class="uk-list uk-list-line">
+		        <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+		        <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+		        <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+		        <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+		    </ul>
+		</div>
     </div>
-
-	</div>
-</div>
-
-{{template "footer" .}}
-
-</body>
-</html>

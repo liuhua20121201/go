@@ -27,10 +27,16 @@ func (c *MainController) Blogs() {
 	var blogs []*models.Blog
 	num, _ := orm.NewOrm().QueryTable("Blog").All(&blogs)
 	c.SetPaginator(10, num)
-
-	c.Data["website"] = beego.AppConfig.String("website")
 	c.Data["blogs"] = blogs
-	c.TplName = "blogs.tpl"
+
+	c.Data["webname"] = beego.AppConfig.String("webname")
+	c.Data["website"] = beego.AppConfig.String("website")
+	c.Layout = "__base.tpl"
+	c.LayoutSections = make(map[string]string)
+
+	c.Data["title"] =  "欢迎"
+    c.TplName = "blogs.tpl"
+    c.LayoutSections["scriptTpl"] = "blogs_script.tpl"
 }
 
 func (c *MainController) Blog() {
@@ -55,14 +61,23 @@ func (c *MainController) Blog() {
 	var comments []*models.Comment
 	o.QueryTable("Comment").Filter("BlogId", blog.Id).OrderBy("-Id").All(&comments)
 
-	c.Data["website"] = beego.AppConfig.String("website")
 	c.Data["blog"] = blog
 	c.Data["comments"] = comments
-	c.TplName = "blog.tpl"
+
+	c.Data["webname"] = beego.AppConfig.String("webname")
+	c.Data["website"] = beego.AppConfig.String("website")
+	c.Layout = "__base.tpl"
+	c.LayoutSections = make(map[string]string)
+
+	c.Data["title"] =  "日志"
+    c.TplName = "blog.tpl"
+    c.LayoutSections["scriptTpl"] = "blog_script.tpl"
 }
 
 func (c *MainController) Login() {	
+	c.Data["webname"] = beego.AppConfig.String("webname")
 	c.Data["website"] = beego.AppConfig.String("website")
+	c.Data["title"] =  "登陆"
 	c.TplName = "login.tpl"
 }
 
@@ -72,8 +87,14 @@ func (c *MainController) Logout() {
 }
 
 func (c *MainController) Register() {	
+	c.Data["webname"] = beego.AppConfig.String("webname")
 	c.Data["website"] = beego.AppConfig.String("website")
-	c.TplName = "register.tpl"
+	c.Layout = "__base.tpl"
+	c.LayoutSections = make(map[string]string)
+
+	c.Data["title"] =  "注册"
+    c.TplName = "register.tpl"
+    c.LayoutSections["scriptTpl"] = "register_script.tpl"
 }
 
 func (c *MainController) Setting() {
@@ -87,11 +108,18 @@ func (c *MainController) Setting() {
 		c.Ctx.Redirect(302, "/login")
 	}
 
+	c.Data["webname"] = beego.AppConfig.String("webname")
+	c.Data["website"] = beego.AppConfig.String("website")
+	c.Layout = "__base.tpl"
+	c.LayoutSections = make(map[string]string)
+
 	if user.Admin {
-		c.Data["website"] = beego.AppConfig.String("website")
+		c.Data["title"] =  "管理"
 		c.TplName = "manage.tpl"
+		c.LayoutSections["scriptTpl"] = "manage_script.tpl"
 	}else{
-		c.Data["website"] = beego.AppConfig.String("website")
+		c.Data["title"] =  "设置"
 		c.TplName = "setting.tpl"
+		c.LayoutSections["scriptTpl"] = "setting_script.tpl"
 	}		
 }

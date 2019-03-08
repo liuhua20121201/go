@@ -1,38 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ .blog.Name }} - {{.website}}</title>
-    {{template "head" .}}
-
-<script>
-var comment_url = '/api/blog/{{ .blog.Id }}/comments';
-
-$(function () {
-    var $form = $('#form-comment');
-    $form.submit(function (e) {
-        e.preventDefault();
-        $form.showFormError('');
-        var content = $form.find('textarea').val().trim();
-        if (content==='') {
-            return $form.showFormError('请输入评论内容！');
-        }
-        $form.postJSON(comment_url, { content: content }, function (err, result) {
-            if (result.Str) {
-                return $form.showFormError(result.Str);
-            }
-            refresh();
-        });
-    });
-});
-</script>
-</head>
-<body>
-
-{{template "header" .}}
-
-<div class="uk-container uk-container-center">
-    <div class="uk-grid">
-
     <div class="uk-width-medium-3-4">
         <article class="uk-article">
             <h2>{{ .blog.Name }}</h2>
@@ -90,13 +55,14 @@ $(function () {
     </div>
 
     <div class="uk-width-medium-1-4">
-        {{template "right" .}}
+        <div class="uk-panel uk-panel-header">
+            <h3 class="uk-panel-title">友情链接</h3>
+            <ul class="uk-list uk-list-line">
+                <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+                <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+                <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+                <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="">待定</a></li>
+            </ul>
+        </div>
     </div>
 
-    </div>
-</div>
-
-{{template "footer" .}}
-
-</body>
-</html>

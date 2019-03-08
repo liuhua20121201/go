@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<title>{{.title}} - {{.webname}}</title>
 	<link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
-	<title>错误</title>
 	<style type="text/css">
 
 		body {
